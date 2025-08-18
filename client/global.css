@@ -1,0 +1,1099 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Dark futuristic theme variables
+   * All colors are in HSL format for consistent theming
+  */
+  :root {
+    /* Dark theme as default - obsidian/charcoal base */
+    --background: 213 20% 6%; /* #0a0d12 obsidian */
+    --foreground: 210 40% 98%;
+
+    --card: 215 25% 8%; /* #0b0f14 charcoal with slight transparency */
+    --card-foreground: 210 40% 98%;
+
+    --popover: 215 25% 8%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Electric blue for primary CTAs */
+    --primary: 194 100% 50%; /* #00d4ff electric blue */
+    --primary-foreground: 213 20% 6%;
+
+    --secondary: 215 25% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 25% 10%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    /* Electric cyan for accents */
+    --accent: 180 100% 50%; /* #00ffff electric cyan */
+    --accent-foreground: 213 20% 6%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 25% 15%;
+    --input: 215 25% 12%;
+    --ring: 194 100% 50%; /* Electric blue ring */
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 213 20% 6%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 194 100% 50%;
+    --sidebar-primary-foreground: 213 20% 6%;
+    --sidebar-accent: 215 25% 12%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 215 25% 15%;
+    --sidebar-ring: 194 100% 50%;
+
+    /* Enhanced futuristic variables */
+    --bg: #0a0d12;
+    --glass: rgba(255, 255, 255, 0.06);
+    --border-glass: rgba(255, 255, 255, 0.12);
+    --neon: #47d6ff;
+    --violet: #7c5cff;
+
+    /* Hero boot animation variables */
+    --ease-kinno: cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Enhanced hero background variables */
+    --bg1: #0a0d12;
+    --bg2: #10141e;
+    --spin-duration: 38s;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-obsidian text-foreground font-body;
+    background-image:
+      radial-gradient(
+        circle at 20% 80%,
+        rgba(0, 212, 255, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        rgba(139, 92, 246, 0.1) 0%,
+        transparent 50%
+      );
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Neon headline word */
+  .neon-headline {
+    background: linear-gradient(90deg, #47d6ff 0%, #3aa3ff 50%, #7c5cff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 22px rgba(71, 214, 255, 0.35);
+  }
+
+  /* Buttons / cards glow */
+  .neo-glow {
+    box-shadow:
+      0 0 0 1px var(--border-glass) inset,
+      0 0 24px rgba(71, 214, 255, 0.25);
+    backdrop-filter: blur(10px);
+  }
+
+  .neo-btn {
+    position: relative;
+    border: 1px solid rgba(71, 214, 255, 0.45);
+    background: linear-gradient(
+      180deg,
+      rgba(71, 214, 255, 0.18),
+      rgba(124, 92, 255, 0.14)
+    );
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease;
+  }
+
+  .neo-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px rgba(71, 214, 255, 0.4);
+  }
+
+  .neo-btn:focus-visible {
+    outline: 2px solid var(--neon);
+    outline-offset: 2px;
+  }
+
+  /* Marquee (seamless, infinite) */
+  .marquee {
+    overflow: hidden;
+    position: relative;
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 10%,
+      #000 90%,
+      transparent
+    );
+  }
+
+  .marquee__track {
+    display: flex;
+    gap: 3rem;
+    will-change: transform;
+    animation: marquee-scroll var(--marquee-speed, 40s) linear infinite;
+  }
+
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    } /* requires duplicated track */
+  }
+
+  /* Scroll reveal (re-animates every time) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px) scale(0.995);
+    transition:
+      opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee__track {
+      animation-duration: 0s !important;
+    }
+    .reveal,
+    .reveal.in-view {
+      transition: none;
+      transform: none;
+    }
+  }
+
+  /* Modal */
+  #discount-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    z-index: 9999;
+  }
+
+  #discount-modal[aria-hidden="false"] {
+    display: block;
+  }
+
+  #discount-modal .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 7, 10, 0.6);
+    backdrop-filter: blur(6px);
+  }
+
+  #discount-modal .panel {
+    position: relative;
+    margin: 6vh auto 0;
+    max-width: 900px;
+    width: 92%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-glass);
+    border-radius: 20px;
+    box-shadow: 0 0 36px rgba(71, 214, 255, 0.35);
+  }
+
+  /* Floating open button */
+  #open-discount {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 9998;
+  }
+
+  /* Enhanced glassmorphism card component */
+  .glass-card {
+    @apply backdrop-blur-md bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-card:hover {
+    @apply neo-glow;
+  }
+
+  /* Neon glow text */
+  .text-neon {
+    @apply text-electric-blue;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  }
+}
+
+@layer utilities {
+  /* Smooth scrolling and reduce motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Hero Boot Animation Styles */
+/* Base states (before play) */
+.hero-boot .hero-offer,
+.hero-boot .hero-title,
+.hero-boot .hero-sub,
+.hero-boot .hero-chip,
+.hero-boot .hero-cta,
+.hero-boot #open-discount {
+  opacity: 0;
+  transform: translateY(14px) scale(0.98);
+}
+
+/* When JS adds .boot-play, run the sequence */
+.boot-play .hero-offer {
+  animation: k-slideDown 0.4s var(--ease-kinno) both;
+}
+.boot-play .hero-title {
+  animation: k-titleIn 0.42s var(--ease-kinno) 0.12s both;
+}
+
+/* Single sheen across the highlighted word */
+.hero-highlight {
+  position: relative;
+  background: linear-gradient(90deg, var(--neon), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 18px rgba(71, 214, 255, 0.35);
+  overflow: hidden;
+}
+.boot-play .hero-highlight::after {
+  content: "";
+  position: absolute;
+  inset: 0 -35% 0 -35%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.7) 32%,
+    transparent
+  );
+  transform: translateX(-100%);
+  filter: blur(2px);
+  animation: k-sheen 0.5s ease 0.45s both;
+}
+
+.boot-play .hero-sub {
+  animation: k-fadeUp 0.3s var(--ease-kinno) 0.52s both;
+}
+
+.boot-play .hero-chip:nth-of-type(1) {
+  animation: k-fadeUp 0.32s var(--ease-kinno) 0.62s both;
+}
+.boot-play .hero-chip:nth-of-type(2) {
+  animation: k-fadeUp 0.32s var(--ease-kinno) 0.74s both;
+}
+.boot-play .hero-chip:nth-of-type(3) {
+  animation: k-fadeUp 0.32s var(--ease-kinno) 0.86s both;
+}
+
+.boot-play .hero-cta {
+  animation: k-ctaIn 0.3s var(--ease-kinno) 1.02s both;
+}
+.boot-play .hero-cta.primary {
+  animation:
+    k-ctaIn 0.3s var(--ease-kinno) 1.02s both,
+    k-glow 1.4s ease 1.36s 1;
+}
+
+.boot-play #open-discount {
+  transform: translate(12px, 12px) scale(0.98);
+  animation: k-fabIn 0.34s var(--ease-kinno) 1.2s both;
+}
+
+/* Keyframes */
+@keyframes k-slideDown {
+  from {
+    opacity: 0.6;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes k-titleIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes k-sheen {
+  to {
+    transform: translateX(140%);
+  }
+}
+@keyframes k-fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes k-ctaIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes k-glow {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(71, 214, 255, 0),
+      0 0 0 0 rgba(124, 92, 255, 0);
+  }
+  40% {
+    box-shadow:
+      0 0 24px 0 rgba(71, 214, 255, 0.45),
+      0 0 48px 0 rgba(124, 92, 255, 0.25);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(71, 214, 255, 0),
+      0 0 0 0 rgba(124, 92, 255, 0);
+  }
+}
+@keyframes k-fabIn {
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Futuristic Enhancement Styles */
+
+/* Neon sheen effect - using hero-highlight animation instead */
+.neon-sheen {
+  position: relative;
+  overflow: hidden;
+}
+/* Removed .neon-sheen::after to prevent duplicate animation with hero-highlight */
+
+/* Magnetic button effect */
+.magnetic {
+  transition: transform 0.15s var(--ease-kinno);
+  cursor: pointer;
+}
+
+/* Hero glow cursor follower */
+.hero-area {
+  position: relative;
+}
+#heroGlow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(71, 214, 255, 0.15),
+    rgba(124, 92, 255, 0.1) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  filter: blur(20px);
+}
+
+/* 3D tilt effect */
+.tilt {
+  transform-style: preserve-3d;
+  transition: transform 0.2s var(--ease-kinno);
+  will-change: transform;
+}
+
+/* Section title neon underline */
+.section-title {
+  position: relative;
+  display: inline-block;
+}
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--neon), var(--violet));
+  transition: width 0.6s var(--ease-kinno);
+  box-shadow: 0 0 10px rgba(71, 214, 255, 0.5);
+}
+.section-title.in-view::after {
+  width: 100%;
+}
+
+/* Enhanced Hero Background System */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.bg-rotator {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 360vmax;
+  height: 360vmax; /* larger diameter */
+  transform: translate(-50%, -50%) rotate(0deg);
+  opacity: 0.28;
+  filter: saturate(1.1);
+  background:
+    radial-gradient(
+      1200px 600px at 20% 25%,
+      rgba(124, 92, 255, 0.2),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 700px at 70% 70%,
+      rgba(71, 214, 255, 0.18),
+      transparent 60%
+    ),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.05) 0 6px,
+      rgba(0, 0, 0, 0.05) 6px 12px
+    ),
+    linear-gradient(180deg, #0a0d12, #10141e);
+  animation: bgSpin 38s linear infinite;
+}
+@keyframes bgSpin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes bgSpin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* One-time white sweep - removed duplicate */
+
+/* White sweep animation - runs once and disappears */
+@keyframes sweepAcross {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0.6;
+  }
+  85% {
+    transform: translateX(115%);
+    opacity: 0.18;
+  }
+  100% {
+    transform: translateX(170%);
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+  }
+}
+
+.hero-section {
+  position: relative;
+}
+
+.light-sweep {
+  position: absolute;
+  inset: 0 auto 0 -22vw;
+  width: 18vw;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 1;
+  animation: sweepAcross 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s 1 forwards;
+}
+
+.light-sweep.animation-complete {
+  display: none !important;
+}
+.light-sweep.is-gone {
+  display: none !important;
+} /* kill state */
+
+@media (prefers-reduced-motion: reduce) {
+  .light-sweep {
+    animation: none !important;
+    display: none !important;
+  }
+}
+
+/* Hero coin layer - only in hero section */
+.coin-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* =========================================
+   EXPERIENCE KINNOBOT — SIZE HARMONIZER
+   ========================================= */
+/* ---------- scale the whole section down ~20% (desktop) ---------- */
+.exp-wrap {
+  transform: scale(0.8); /* 80% size */
+  transform-origin: top center;
+}
+@media (max-width: 1199px) {
+  .exp-wrap {
+    transform: scale(0.9);
+  } /* a little larger on tablet */
+}
+@media (max-width: 767px) {
+  .exp-wrap {
+    transform: none;
+  } /* full size on mobile */
+}
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    "controls dashboard dashboard"
+    "desktop  mobile    watch"
+    ".        flow      .";
+  justify-items: center; /* center cards in their cells */
+  align-items: center;
+  gap: 32px; /* maximized spacing */
+}
+
+/* ====== Area assignment ====== */
+.exp-controls {
+  grid-area: controls;
+}
+.exp-dashboard {
+  grid-area: dashboard;
+}
+.exp-desktop {
+  grid-area: desktop;
+}
+.exp-mobile {
+  grid-area: mobile;
+}
+.exp-watch {
+  grid-area: watch;
+}
+.exp-flow {
+  grid-area: flow;
+}
+
+/* Experience KinnoBot cards with harmonized sizing */
+.exp-grid .card {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 8px !important;
+  gap: 8px;
+}
+
+.exp-grid .card-media {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 18px rgba(71, 214, 255, 0.12);
+  overflow: hidden;
+  width: fit-content;
+  height: fit-content;
+  justify-items: center;
+}
+
+/* Panel label inside glass panel */
+.panel-label {
+  text-align: center;
+  margin: 0;
+  align-self: start;
+}
+
+/* Uniform spacing for all media elements */
+.exp-grid .card-media img,
+.exp-grid .card-media video {
+  margin: 16px; /* increased uniform margin */
+  border-radius: 12px;
+}
+
+/* Fit without cropping; scale via CSS var */
+.exp-grid .card-media > img,
+.exp-grid .card-media > video {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transform: scale(var(--media-scale, 1));
+  transform-origin: center;
+  margin: 0;
+  background: transparent;
+  border: 0;
+}
+
+/* Enhanced sizes for Dashboard and Integration Workflow */
+.exp-dashboard .card-media {
+  min-height: clamp(380px, 38vw, 540px); /* increased by 20% */
+  min-width: clamp(660px, 72vw, 1020px); /* increased by 20% */
+  max-width: 98vw;
+  padding: 20px; /* increased padding for larger content */
+}
+
+.exp-flow .card-media {
+  min-height: clamp(290px, 32vw, 440px); /* scaled up 15% */
+  min-width: clamp(520px, 58vw, 800px); /* scaled up 15% */
+  max-width: 90vw;
+}
+
+/* Other panels remain snug fit */
+
+/* Per-tile size nudge (subtle, no cropping) */
+.exp-controls .card-media > * {
+  --media-scale: 0.98;
+}
+.exp-dashboard .card-media > * {
+  --media-scale: 1.15;
+} /* scaled up 20% from .95 */
+.exp-desktop .card-media > * {
+  --media-scale: 0.96;
+}
+.exp-mobile .card-media > * {
+  --media-scale: 1.02;
+}
+.exp-watch .card-media > * {
+  --media-scale: 0.92;
+}
+.exp-flow .card-media > * {
+  --media-scale: 0.98;
+}
+
+/* Safety: strip hard sizes if any */
+.exp-grid .card-media > img,
+.exp-grid .card-media > video {
+  inline-size: auto !important;
+  block-size: auto !important;
+}
+
+/* ====== Responsiveness ====== */
+@media (max-width: 1199px) {
+  .exp-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "controls  dashboard"
+      "desktop   mobile"
+      "watch     ."
+      "flow      .";
+    justify-items: center;
+    gap: 24px; /* reduced for tablet */
+  }
+
+  .exp-dashboard .card-media {
+    min-width: clamp(480px, 60vw, 780px); /* 20% larger for tablet */
+    min-height: clamp(336px, 34vw, 456px); /* 20% larger for tablet */
+    padding: 18px;
+  }
+
+  .exp-flow .card-media {
+    min-width: clamp(350px, 45vw, 550px);
+    min-height: clamp(240px, 26vw, 350px);
+  }
+}
+
+@media (max-width: 767px) {
+  .exp-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "controls"
+      "dashboard"
+      "desktop"
+      "mobile"
+      "watch"
+      "flow";
+    justify-items: center;
+    gap: 20px; /* reduced for mobile */
+  }
+
+  .exp-dashboard .card-media {
+    min-width: clamp(360px, 95vw, 540px); /* 20% larger for mobile */
+    max-width: 98vw;
+    min-height: auto; /* let height adjust naturally on mobile */
+    padding: 16px;
+  }
+
+  .exp-flow .card-media {
+    min-width: clamp(300px, 92vw, 450px);
+    max-width: 95vw;
+    min-height: auto; /* let height adjust naturally on mobile */
+  }
+}
+
+/* -------------------------- */
+/* C) FAQ — 3×3 responsive    */
+/* -------------------------- */
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 1023px) {
+  .faq-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 639px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FAQ card */
+.faq-item {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+.faq-item .faq-body {
+  padding: 14px 18px 18px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.faq-item:focus-within summary {
+  outline: 2px solid #47d6ff;
+  outline-offset: 2px;
+}
+
+/* ---------- Experience KinnoBot Consistent Hover Animation ---------- */
+:root {
+  --reveal-delay-step: 90ms;
+}
+#experience .card {
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+#experience .card.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Consistent hover animation for ALL Experience tiles */
+#experience .card .card-media {
+  transition:
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+  will-change: transform, box-shadow;
+}
+#experience .card:hover .card-media {
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 24px rgba(71, 214, 255, 0.22),
+    0 0 0 1px rgba(71, 214, 255, 0.18) inset;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* If any nested wrappers are swallowing hover, forward pointer events: */
+#experience .card,
+#experience .card * {
+  pointer-events: auto;
+}
+
+/* Safety: remove any earlier row-specific hover rules */
+#experience .card:nth-child(n) .card-media:hover {
+  transform: none;
+  box-shadow: none;
+}
+#experience .card:nth-child(n):hover .card-media {
+  transform: translateY(-3px);
+}
+#experience .card:nth-child(1) {
+  transition-delay: calc(var(--reveal-delay-step) * 0);
+}
+#experience .card:nth-child(2) {
+  transition-delay: calc(var(--reveal-delay-step) * 1);
+}
+#experience .card:nth-child(3) {
+  transition-delay: calc(var(--reveal-delay-step) * 2);
+}
+#experience .card:nth-child(4) {
+  transition-delay: calc(var(--reveal-delay-step) * 3);
+}
+#experience .card:nth-child(5) {
+  transition-delay: calc(var(--reveal-delay-step) * 4);
+}
+#experience .card:nth-child(6) {
+  transition-delay: calc(var(--reveal-delay-step) * 5);
+}
+
+/* subtle glow pulse once when revealed */
+@keyframes glowOnce {
+  0% {
+    box-shadow: 0 0 0 rgba(71, 214, 255, 0);
+  }
+  40% {
+    box-shadow: 0 0 24px rgba(71, 214, 255, 0.22);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(71, 214, 255, 0);
+  }
+}
+#experience .card.in-view .card-media {
+  animation: glowOnce 0.9s ease 0.1s 1;
+}
+
+/* ---------- Uniform section spacing (remove the big gap) ---------- */
+.section-spacing {
+  margin-block: clamp(48px, 8vw, 96px);
+}
+#experience {
+  margin-bottom: clamp(48px, 8vw, 96px) !important;
+}
+#activate {
+  margin-top: 0 !important;
+}
+
+/* Collapse empty spacer blocks */
+#experience > .spacer:empty,
+#activate > .spacer:empty {
+  display: none !important;
+  height: 0 !important;
+}
+
+/* Remove top/bottom margins from first/last children that can create phantom gaps */
+#experience > *:first-child,
+#activate > *:first-child {
+  margin-top: 0 !important;
+}
+#experience > *:last-child,
+#activate > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* ---------- Terms of Service & Refund Policy Layout Fixes ---------- */
+/* Prevent fixed header or modals from covering the top of the page: */
+#tos,
+#refund {
+  position: relative;
+  z-index: 1;
+  min-height: 60vh;
+  padding-top: clamp(72px, 12vh, 128px); /* clears sticky header */
+  padding-bottom: clamp(48px, 8vh, 96px);
+}
+
+/* If a global container has overflow that clipped content, allow visible: */
+html,
+body,
+.builder-content,
+.page-root {
+  overflow: visible !important;
+}
+
+/* Ensure first and last child blocks don't add phantom gaps: */
+#tos > *:first-child,
+#refund > *:first-child {
+  margin-top: 0 !important;
+}
+#tos > *:last-child,
+#refund > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Links in footer/header must point to these routes: */
+a[href="/tos"],
+a[href="/refund-policy"] {
+  pointer-events: auto;
+}
+
+/* If the ToS/Refund container was hidden by a collapsed parent: */
+#tos [data-hidden="true"],
+#refund [data-hidden="true"] {
+  display: block !important;
+  opacity: 1 !important;
+}
+
+/* Optional: readable typography */
+#tos,
+#refund {
+  --fg: rgba(255, 255, 255, 0.88);
+  --muted: rgba(255, 255, 255, 0.68);
+}
+#tos h1,
+#refund h1 {
+  margin-bottom: 0.6em;
+}
+#tos h2,
+#refund h2 {
+  margin: 1.2em 0 0.5em;
+}
+#tos p,
+#refund p {
+  color: var(--fg);
+  line-height: 1.6;
+  margin: 0.6em 0;
+}
+#tos li,
+#refund li {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0.35em 0;
+}
+
+/* ---------- FAQ Scroll Reveals ---------- */
+.faq-item {
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+  will-change: transform, opacity;
+}
+.faq-item.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.faq-item:hover {
+  box-shadow: 0 0 18px rgba(71, 214, 255, 0.15);
+  border-color: rgba(71, 214, 255, 0.25);
+}
+
+/* Staggered delays for FAQ items */
+.faq-item:nth-child(1) {
+  transition-delay: calc(var(--reveal-delay-step) * 0);
+}
+.faq-item:nth-child(2) {
+  transition-delay: calc(var(--reveal-delay-step) * 1);
+}
+.faq-item:nth-child(3) {
+  transition-delay: calc(var(--reveal-delay-step) * 2);
+}
+.faq-item:nth-child(4) {
+  transition-delay: calc(var(--reveal-delay-step) * 3);
+}
+.faq-item:nth-child(5) {
+  transition-delay: calc(var(--reveal-delay-step) * 4);
+}
+.faq-item:nth-child(6) {
+  transition-delay: calc(var(--reveal-delay-step) * 5);
+}
+.faq-item:nth-child(7) {
+  transition-delay: calc(var(--reveal-delay-step) * 6);
+}
+.faq-item:nth-child(8) {
+  transition-delay: calc(var(--reveal-delay-step) * 7);
+}
+.faq-item:nth-child(9) {
+  transition-delay: calc(var(--reveal-delay-step) * 8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-boot * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .boot-play .hero-offer,
+  .boot-play .hero-title,
+  .boot-play .hero-sub,
+  .boot-play .hero-chip,
+  .boot-play .hero-cta,
+  .boot-play #open-discount {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Disable futuristic animations for reduced motion */
+  .bg-rotator,
+  .light-sweep,
+  .magnetic,
+  .tilt {
+    animation: none !important;
+    transform: none !important;
+  }
+  .bg-rotator {
+    opacity: 0.14;
+  }
+  .light-sweep {
+    opacity: 0;
+  }
+  #heroGlow {
+    display: none;
+  }
+}
+
+/* ---------- JavaScript for Terms/Refund scroll offset ---------- */
+/* This will be handled by React effects but CSS scroll-padding as backup */
+html {
+  scroll-padding-top: 96px;
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
