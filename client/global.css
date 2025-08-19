@@ -441,9 +441,10 @@
 
 /* 3D tilt effect */
 .tilt {
-  transform-style: preserve-3d;
-  transition: transform 0.2s var(--ease-kinno);
-  will-change: transform;
+  transform-style: preserve-3d !important;
+  transition: transform 0.2s var(--ease-kinno) !important;
+  will-change: transform !important;
+  perspective: 1000px !important;
 }
 
 /* Section title neon underline */
@@ -641,8 +642,8 @@
 .exp-grid .card-media {
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 12px;
-  padding: 16px;
+  gap: 16px;
+  padding: 20px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -651,6 +652,7 @@
   width: fit-content;
   height: fit-content;
   justify-items: center;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Panel label inside glass panel */
@@ -665,6 +667,7 @@
 .exp-grid .card-media video {
   margin: 16px; /* increased uniform margin */
   border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Fit without cropping; scale via CSS var */
@@ -830,6 +833,57 @@
 :root {
   --reveal-delay-step: 90ms;
 }
+
+/* Consistent styling for KinnoBot GIFs */
+.kinnobot-gif {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  margin: 16px !important;
+  padding: 0 !important;
+}
+
+.kinnobot-gif:hover {
+  transform: scale(1.03);
+  filter: brightness(1.1);
+}
+
+/* Dashboard media styling */
+.dashboard-media {
+  width: auto !important;
+  max-width: 1100px !important;
+  min-width: 640px !important;
+  min-height: 440px !important;
+  height: auto !important;
+  align-self: center !important;
+  padding: 20px !important;
+  display: grid !important;
+  grid-template-rows: auto 1fr !important;
+  gap: 16px !important;
+  justify-items: center !important;
+}
+
+/* Mobile media styling */
+.mobile-media {
+  width: auto !important;
+  max-width: 400px !important;
+  min-width: 300px !important;
+  height: auto !important;
+  padding: 20px !important;
+  display: grid !important;
+  grid-template-rows: auto 1fr !important;
+  gap: 16px !important;
+  justify-items: center !important;
+}
+
+/* Hover effect for GIFs */
+#experience .card:hover .kinnobot-gif {
+  transform: scale(1.03);
+  filter: brightness(1.1);
+}
 #experience .card {
   opacity: 0;
   transform: translateY(18px) scale(0.985);
@@ -846,17 +900,17 @@
 /* Consistent hover animation for ALL Experience tiles */
 #experience .card .card-media {
   transition:
-    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.22s ease,
-    border-color 0.22s ease;
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
   will-change: transform, box-shadow;
 }
 #experience .card:hover .card-media {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
   box-shadow:
-    0 0 24px rgba(71, 214, 255, 0.22),
-    0 0 0 1px rgba(71, 214, 255, 0.18) inset;
-  border-color: rgba(255, 255, 255, 0.18);
+    0 0 28px rgba(71, 214, 255, 0.3),
+    0 0 0 1px rgba(71, 214, 255, 0.25) inset;
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* If any nested wrappers are swallowing hover, forward pointer events: */
@@ -865,13 +919,31 @@
   pointer-events: auto;
 }
 
+/* Ensure all cards in all rows can be interacted with */
+#experience .exp-grid .card {
+  position: relative;
+  z-index: 1;
+}
+
 /* Safety: remove any earlier row-specific hover rules */
 #experience .card:nth-child(n) .card-media:hover {
   transform: none;
   box-shadow: none;
 }
 #experience .card:nth-child(n):hover .card-media {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  box-shadow:
+    0 0 28px rgba(71, 214, 255, 0.3),
+    0 0 0 1px rgba(71, 214, 255, 0.25) inset;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Ensure tilt animation works on all rows */
+#experience .card.tilt {
+  transform-style: preserve-3d !important;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  will-change: transform !important;
+  perspective: 1000px !important;
 }
 #experience .card:nth-child(1) {
   transition-delay: calc(var(--reveal-delay-step) * 0);
@@ -892,20 +964,20 @@
   transition-delay: calc(var(--reveal-delay-step) * 5);
 }
 
-/* subtle glow pulse once when revealed */
+/* Enhanced glow pulse once when revealed */
 @keyframes glowOnce {
   0% {
     box-shadow: 0 0 0 rgba(71, 214, 255, 0);
   }
   40% {
-    box-shadow: 0 0 24px rgba(71, 214, 255, 0.22);
+    box-shadow: 0 0 32px rgba(71, 214, 255, 0.35);
   }
   100% {
     box-shadow: 0 0 0 rgba(71, 214, 255, 0);
   }
 }
 #experience .card.in-view .card-media {
-  animation: glowOnce 0.9s ease 0.1s 1;
+  animation: glowOnce 1.2s ease 0.1s 1;
 }
 
 /* ---------- Uniform section spacing (remove the big gap) ---------- */
