@@ -172,7 +172,7 @@ function initializeInteractiveEffects(
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
 
-    target.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+    target.style.transform = `translate(${x * 0.04}px, ${y * 0.04}px)`;
   };
 
   const handleMagneticReset = (e: MouseEvent) => {
@@ -187,8 +187,8 @@ function initializeInteractiveEffects(
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateX = (y - centerY) / 10;
-    const rotateY = (centerX - x) / 10;
+    const rotateX = (y - centerY) / 40;
+    const rotateY = (centerX - x) / 40;
 
     target.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
   };
@@ -275,7 +275,7 @@ function initializeHeroBackground(): (() => void) | null {
       "https://cdn.builder.io/o/assets%2Fceb01c8090ad439481a6fd86a803fe4a%2F24979a82aa2248eb827bd4f5556a2c55?alt=media&token=150c1323-3fda-4c74-9c6e-f8c8c359cc08&apiKey=ceb01c8090ad439481a6fd86a803fe4a",
     ];
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 5; i++) {
       const img = document.createElement("img");
       img.src = COINS[i % COINS.length];
       img.alt = "floating coin";
@@ -325,9 +325,9 @@ function initializeHeroBackground(): (() => void) | null {
         top: `${top}%`,
       });
 
-      const duration = 20 + Math.random() * 18;
-      const deltaX = Math.random() * 30 - 15;
-      const deltaY = Math.random() * 20 - 10;
+      const duration = 45 + Math.random() * 30;
+      const deltaX = Math.random() * 10 - 5;
+      const deltaY = Math.random() * 8 - 4;
 
       img.animate(
         [

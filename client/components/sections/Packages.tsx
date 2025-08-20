@@ -4,7 +4,7 @@ import { PackageCard } from "./PackageCard";
 
 export function Packages() {
   return (
-    <section className="py-8 relative">
+    <section id="packages" className="py-8 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10 reveal">
           <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neon mb-6">

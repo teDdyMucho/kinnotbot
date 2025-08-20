@@ -6,6 +6,7 @@ import {
   GlassCardDescription,
 } from "@/components/ui/glass-card";
 import { founders } from "@/constants";
+import { TikTokIcon, YouTubeIcon, InstagramIcon } from "@/components/ui/social-icons";
 
 export function Founders() {
   return (
@@ -22,13 +23,13 @@ export function Founders() {
             <div key={index} className="reveal">
               <GlassCard variant="hover" size="lg" className="h-full">
                 <GlassCardHeader className="text-center mb-6">
-                  {/* Avatar placeholder - could be replaced with actual images */}
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-electric-blue to-electric-violet p-1">
-                    <div className="w-full h-full rounded-full bg-obsidian flex items-center justify-center">
-                      <span className="text-2xl font-display font-bold text-electric-cyan">
-                        {person.name[0]}
-                      </span>
-                    </div>
+                  {/* Founder Images */}
+                  <div className="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-electric-blue to-electric-violet p-1 overflow-hidden">
+                    <img 
+                      src={person.name === "Kinno" ? "/images/founder-kinno.jpg" : "/images/founder-ethan.jpg"} 
+                      alt={`${person.name} - ${person.role}`}
+                      className="w-full h-full rounded-full object-cover"
+                    />
                   </div>
                   <GlassCardTitle className="text-2xl sm:text-3xl mb-2">
                     {person.name}
@@ -36,6 +37,39 @@ export function Founders() {
                   <GlassCardDescription className="text-lg text-electric-cyan font-semibold">
                     {person.role}
                   </GlassCardDescription>
+                  
+                  {/* Social Media Links - Only for Kinno */}
+                  {person.name === "Kinno" && (
+                    <div className="flex justify-center gap-4 mt-3">
+                      <a 
+                        href="https://www.tiktok.com/@kinnomoney" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-electric-cyan hover:text-electric-blue transition-colors"
+                        aria-label="TikTok"
+                      >
+                        <TikTokIcon />
+                      </a>
+                      <a 
+                        href="https://www.youtube.com/@kinnomoneyx" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-electric-cyan hover:text-electric-blue transition-colors"
+                        aria-label="YouTube"
+                      >
+                        <YouTubeIcon />
+                      </a>
+                      <a 
+                        href="https://www.instagram.com/kinnomoney/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-electric-cyan hover:text-electric-blue transition-colors"
+                        aria-label="Instagram"
+                      >
+                        <InstagramIcon />
+                      </a>
+                    </div>
+                  )}
                 </GlassCardHeader>
 
                 <GlassCardContent>

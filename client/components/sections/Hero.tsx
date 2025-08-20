@@ -13,7 +13,7 @@ export function Hero() {
     <section
       id="hero"
       ref={containerRef}
-      className="hero-section hero-area min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="hero-section hero-area min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6"
     >
       {/* Coin layer for floating coins */}
       <div className="coin-layer"></div>
@@ -44,16 +44,16 @@ export function Hero() {
               className="w-24 h-24 mx-auto hero-logo" 
             />
           </div>
-          <h1 className="hero-title text-6xl sm:text-7xl lg:text-8xl font-display font-bold mb-6 text-white">
+          <h1 className="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold mb-6 text-white">
             Trade Smart with{" "}
             <span className="hero-highlight neon-headline">KINNO BOT</span>
           </h1>
 
-          <p className="hero-sub text-xl sm:text-2xl lg:text-3xl text-foreground/90 mb-8 font-medium">
+          <p className="hero-sub text-lg sm:text-xl md:text-2xl lg:text-3xl text-foreground/90 mb-8 font-medium">
             {hero.sub}
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-3 md:gap-4 mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto">
             {hero.bullets.map((bullet, index) => (
               <div
                 key={index}
@@ -66,18 +66,20 @@ export function Hero() {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            {hero.ctas.map((cta, index) => (
-              <NeonButton
-                key={index}
-                size="lg"
-                variant={index === 0 ? "neon" : "neon-outline"}
-                onClick={() => window.open(whopLink, "_blank")}
-                className={`hero-cta magnetic min-w-[160px] ${index === 0 ? "primary" : ""}`}
-              >
-                {cta}
-              </NeonButton>
-            ))}
+          <div className="flex justify-center items-center">
+            <NeonButton
+              size="lg"
+              variant="neon"
+              onClick={() => {
+                const packagesSection = document.getElementById('packages');
+                if (packagesSection) {
+                  packagesSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="hero-cta magnetic min-w-[160px] primary"
+            >
+              {hero.ctas[0]}
+            </NeonButton>
           </div>
         </div>
       </div>
