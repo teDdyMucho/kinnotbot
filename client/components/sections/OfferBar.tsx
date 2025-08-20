@@ -6,10 +6,11 @@ export function OfferBar() {
   const { openModal } = useDiscountModal();
   return (
     <motion.div
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="bg-gradient-to-r from-electric-blue to-electric-violet py-3 px-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      className="bg-gradient-to-r from-electric-blue to-electric-violet py-3 px-4 sticky top-0 z-50 mt-0"
+      style={{ marginTop: 0 }}
     >
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-4 text-center lg:text-left">

@@ -8,6 +8,7 @@ import {
   BarChart3,
 } from "lucide-react";
 import { useAnimations } from "@/hooks/useAnimations";
+import { SectionConnector } from "@/components/ui/SectionConnector";
 
 export function VisualShowcase() {
   const { containerRef } = useAnimations({
@@ -15,21 +16,26 @@ export function VisualShowcase() {
     enableInteractiveEffects: true,
   });
   return (
-    <section id="experience" ref={containerRef} className="py-6 relative">
+    <section id="experience" ref={containerRef} className="pt-6 pb-16 md:pt-10 md:pb-24 lg:pt-16 lg:pb-32 relative">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10 reveal">
-          <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neon mb-6">
+        <div className="text-center mb-6 md:mb-8 lg:mb-10 reveal">
+          <img 
+            src="/images/kinnobotlogo.png" 
+            alt="KinnoBot Logo" 
+            className="w-24 h-auto mx-auto mb-6 animate-fadeIn" 
+          />
+          <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neon mb-4 md:mb-6">
             Experience KinnoBot
           </h2>
-          <p className="text-lg sm:text-xl text-foreground/70">
+          <p className="text-lg sm:text-xl text-foreground/70 px-2">
             See our AI trading platform in action across all your devices
           </p>
         </div>
 
         {/* Experience Grid */}
-        <div className="reveal" style={{ height: "1750px" }}>
-          <div className="exp-wrap">
-            <div className="exp-grid">
+        <div className="reveal" style={{ height: "auto", minHeight: "auto", maxHeight: "auto", marginBottom: "0" }}>
+          <div className="exp-wrap w-full">
+            <div className="exp-grid w-full">
               {/* Trading Controls */}
               <div className="card exp-controls tilt">
                 <div className="card-media">
@@ -125,6 +131,8 @@ export function VisualShowcase() {
           </div>
         </div>
       </div>
+      {/* Section connector for better visual flow */}
+      <SectionConnector />
     </section>
   );
 }

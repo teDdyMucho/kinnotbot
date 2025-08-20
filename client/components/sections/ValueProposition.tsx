@@ -12,7 +12,7 @@ export function ValueProposition() {
     <section className="py-12 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 reveal">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-6 text-neon">
+          <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold mb-6 text-neon">
             {valueProposition.headings[0]}
           </h2>
 

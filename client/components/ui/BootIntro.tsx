@@ -218,8 +218,16 @@ export default function BootIntro() {
                     }
               }
             >
-              {/* Text with shine effect */}
-              <motion.div className="intro__word relative overflow-hidden">
+              {/* Logo and text with shine effect */}
+              <motion.div className="intro__word relative overflow-hidden flex flex-col items-center gap-4">
+                <motion.img
+                  src="/images/kinnobotlogo.png"
+                  alt="KinnoBot Logo"
+                  className="w-20 h-20 md:w-24 md:h-24"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.7, delay: 0.2 }}
+                />
                 <motion.span
                   className="font-extrabold uppercase tracking-[0.06em] text-transparent bg-clip-text text-[clamp(22px,5.4vw,44px)] font-display"
                   style={{

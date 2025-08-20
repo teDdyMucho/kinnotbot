@@ -37,6 +37,13 @@ export function Hero() {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
+          <div className="mb-6 hero-boot">
+            <img 
+              src="/images/kinnobotlogo.png" 
+              alt="KinnoBot Logo" 
+              className="w-24 h-24 mx-auto hero-logo" 
+            />
+          </div>
           <h1 className="hero-title text-6xl sm:text-7xl lg:text-8xl font-display font-bold mb-6 text-white">
             Trade Smart with{" "}
             <span className="hero-highlight neon-headline">KINNO BOT</span>

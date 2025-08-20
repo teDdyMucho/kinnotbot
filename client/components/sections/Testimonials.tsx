@@ -38,7 +38,7 @@ export function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neon mb-6">
+          <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neon mb-6">
             What Traders Say
           </h2>
           <p className="text-lg sm:text-xl text-foreground/70">

@@ -11,10 +11,15 @@ import { CheckCircle2 } from "lucide-react";
 
 export function Steps() {
   return (
-    <section id="activate" className="py-8 relative">
+    <section id="activate" className="pt-24 pb-8 md:pt-24 md:pb-16 lg:pt-32 relative mt-16 md:mt-0">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 reveal">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neon mb-6">
+        <div className="text-center mb-8 reveal">
+          <img 
+            src="/images/kinnobotlogo.png" 
+            alt="KinnoBot Logo" 
+            className="w-24 h-auto mx-auto mb-6 animate-fadeIn" 
+          />
+          <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neon mb-6">
             {steps.sectionTitle}
           </h2>
         </div>

@@ -1,0 +1,164 @@
+/* Responsive utilities for KinnoBot website
+   Preserves current style and theme while enhancing responsiveness
+*/
+
+/* Base responsive container */
+.responsive-container {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Improved responsive grid system */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Responsive image handling */
+.responsive-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Responsive spacing utilities */
+.responsive-spacing {
+  padding: clamp(1.5rem, 5vw, 3rem);
+}
+
+.responsive-margin {
+  margin: clamp(1rem, 3vw, 2rem);
+}
+
+/* Responsive typography */
+.responsive-text {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+.responsive-heading {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+/* Responsive flex containers */
+.responsive-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Enhanced mobile navigation */
+@media (max-width: 767px) {
+  .mobile-stack {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .mobile-full {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .mobile-center {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+  
+  .mobile-hidden {
+    display: none !important;
+  }
+  
+  .mobile-visible {
+    display: block !important;
+  }
+  
+  .mobile-p {
+    padding: 1rem !important;
+  }
+  
+  .mobile-m {
+    margin: 1rem !important;
+  }
+}
+
+/* Enhanced tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tablet-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .tablet-p {
+    padding: 1.5rem !important;
+  }
+  
+  .tablet-m {
+    margin: 1.5rem !important;
+  }
+}
+
+/* Experience section responsive enhancements */
+@media (max-width: 767px) {
+  .exp-grid {
+    gap: 0.75rem !important;
+  }
+  
+  .exp-wrap {
+    transform: scale(1) !important;
+    margin-bottom: 1.5rem !important; /* Reduced spacing for better connectivity */
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+  
+  .card-media {
+    min-width: auto !important;
+    min-height: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0.75rem !important;
+  }
+  
+  .kinnobot-gif {
+    margin: 0.5rem !important;
+    max-height: 280px !important; /* Slightly reduced height on mobile */
+  }
+  
+  .panel-label {
+    margin-bottom: 0.5rem !important;
+  }
+  
+  /* Improved section spacing for better connectivity */
+  #experience {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  
+  #activate {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Add connector between sections */
+  .section-connector {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(124, 92, 255, 0.3), transparent);
+    margin: 0 auto;
+    width: 80%;
+  }
+}
+
+/* Preserve animations but make them less resource intensive on mobile */
+@media (max-width: 767px) {
+  .bg-rotator {
+    opacity: 0.15 !important;
+    animation-duration: 60s !important;
+  }
+  
+  .tilt {
+    transform: none !important;
+    transition: box-shadow 0.2s ease !important;
+  }
+}
