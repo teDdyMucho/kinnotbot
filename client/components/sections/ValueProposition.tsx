@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/glass-card";
 import { valueProposition } from "@/constants";
 import { useEffect, useRef } from "react";
+import { NeonButton } from "../ui/neon-button";
 
 // Add Wistia types
 declare global {
@@ -43,31 +44,34 @@ export function ValueProposition() {
     };
   }, []);
   return (
-    <section className="py-8 sm:py-10 md:py-12 relative">
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="text-center mb-8 reveal">
-          <h2 className="section-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-4 sm:mb-6 text-neon">
+    <section className="py-24 relative">
+      
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="text-center mb-16 reveal">
+          <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
             {valueProposition.headings[0]}
           </h2>
 
-          <p className="text-base sm:text-lg md:text-xl text-foreground/80 max-w-3xl mx-auto leading-relaxed mb-6 sm:mb-8">
+          <p className="text-xl text-foreground/70 max-w-3xl mx-auto leading-relaxed">
             {valueProposition.supporting}
           </p>
           
-          {/* Wistia Video Embed */}
+          {/* Custom Video Player */}
           <div className="max-w-4xl mx-auto mb-8 sm:mb-10 md:mb-12">
-            <div className="relative aspect-video">
-              <div ref={videoRef} className="wistia_responsive_padding" style={{ padding: '56.25% 0 0 0', position: 'relative' }}>
-                <div className="wistia_responsive_wrapper" style={{ height: '100%', left: 0, position: 'absolute', top: 0, width: '100%' }}>
-                  <div className="wistia_embed wistia_async_gf9h2jq90f videoFoam=true" style={{ height: '100%', position: 'relative', width: '100%' }}>
-                    <div className="wistia_swatch" style={{ height: '100%', left: 0, opacity: 1, overflow: 'hidden', position: 'absolute', top: 0, transition: 'opacity 200ms', width: '100%' }}>
-                      <img src="https://fast.wistia.com/embed/medias/gf9h2jq90f/swatch" style={{ filter: 'blur(5px)', height: '100%', objectFit: 'contain', width: '100%' }} alt="Video Thumbnail" aria-hidden="true" />
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="relative aspect-video glass-card border border-white/5 p-4 rounded-lg bg-white/5 transition-all duration-300 hover:bg-white/10 hover:shadow-glow-cyan hover:border-electric-cyan/30">
+              <video 
+                className="w-full h-full object-cover rounded" 
+                controls
+                autoPlay
+                muted
+              >
+                <source src="/images/KinnoShortStory/KinoStory.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
+
+
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -93,6 +97,24 @@ export function ValueProposition() {
             </div>
           ))}
         </div>
+
+        {/* Steady CTA Button */}
+        <div className="flex justify-center mt-12 mb-12 reveal">
+          <NeonButton
+            size="lg"
+            variant="neon"
+            onClick={() => {  
+              const packagesSection = document.getElementById('packages');
+              if (packagesSection) {
+                packagesSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="steady-cta min-w-[220px] py-6 text-lg primary"
+          >
+            Trade Smarter, Not Harder with KinnoBot
+          </NeonButton>
+        </div>
+      
       </div>
     </section>
   );

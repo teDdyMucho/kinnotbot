@@ -6,9 +6,10 @@ import {
   Settings,
   TrendingUp,
   BarChart3,
-} from "lucide-react";
+} from "@/lib/icons";
 import { useAnimations } from "@/hooks/useAnimations";
 import { SectionConnector } from "@/components/ui/SectionConnector";
+import { NeonButton } from "@/components/ui/neon-button";
 
 export function VisualShowcase() {
   const { containerRef } = useAnimations({
@@ -16,7 +17,7 @@ export function VisualShowcase() {
     enableInteractiveEffects: true,
   });
   return (
-    <section id="experience" ref={containerRef} className="pt-6 pb-16 md:pt-10 md:pb-24 lg:pt-16 lg:pb-32 relative">
+    <section id="experience" ref={containerRef} className="pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-8 lg:pb-8 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-6 md:mb-8 lg:mb-10 reveal">
           <img 
@@ -32,8 +33,25 @@ export function VisualShowcase() {
           </p>
         </div>
 
+        {/* Steady CTA Button */}
+      <div className="flex justify-center mt-8 mb-8 reveal">
+        <NeonButton
+          size="lg"
+          variant="neon"
+          onClick={() => {  
+            const contactSection = document.getElementById('packages');
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="steady-cta min-w-[220px] py-6 text-lg primary"
+        >
+          Dominate the Charts with KinnoBot
+        </NeonButton>
+      </div>
+
         {/* Experience Grid */}
-        <div className="reveal" style={{ height: "auto", minHeight: "auto", maxHeight: "auto", marginBottom: "0" }}>
+        <div className="reveal" style={{ height: "auto", minHeight: "auto", maxHeight: "auto", margin: "0" }}>
           <div className="exp-wrap w-full">
             <div className="exp-grid w-full">
               {/* Trading Controls */}
@@ -131,8 +149,6 @@ export function VisualShowcase() {
           </div>
         </div>
       </div>
-      {/* Section connector for better visual flow */}
-      <SectionConnector />
     </section>
   );
 }

@@ -7,7 +7,7 @@ import {
 } from "../components/ui/glass-card";
 import { ScrollToTop } from "../components/ui/ScrollToTop";
 import { refundPolicy, disclaimer } from "../constants";
-import { CreditCard, AlertTriangle } from "lucide-react";
+import { CreditCard, AlertTriangle } from "../lib/icons";
 import { useAnimations } from "../hooks/useAnimations";
 
 export default function RefundPolicy() {

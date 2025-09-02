@@ -137,12 +137,13 @@ function initializeScrollReveals(container: HTMLElement): (() => void) | null {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("in-view");
+          console.log(`Added in-view class to element:`, entry.target);
         }
       });
     },
     {
-      threshold: 0.15,
-      rootMargin: "0px 0px -50px 0px",
+      threshold: 0.05, // Lower threshold to trigger earlier
+      rootMargin: "0px 0px -10px 0px", // Adjusted to trigger sooner
     },
   );
 
@@ -150,7 +151,18 @@ function initializeScrollReveals(container: HTMLElement): (() => void) | null {
   const revealElements = container.querySelectorAll(
     ".reveal, .card, .faq-item",
   );
-  revealElements.forEach((el) => observer.observe(el));
+  
+  console.log(`Found ${revealElements.length} reveal elements to observe`);
+  
+  revealElements.forEach((el) => {
+    observer.observe(el);
+    
+    // Immediate visibility for plan cards to prevent blank state
+    if (el.closest('#packages')) {
+      console.log('Adding immediate in-view class to package element');
+      el.classList.add('in-view');
+    }
+  });
 
   // Section title reveal
   const sectionTitles = container.querySelectorAll(".section-title");
@@ -226,13 +238,7 @@ function initializeInteractiveEffects(
 
 // Hero Background Effects
 function initializeHeroBackground(): (() => void) | null {
-  // Auto-size rotator for ultra-wide screens
-  const rotator = document.querySelector(".bg-rotator") as HTMLElement;
-  if (rotator) {
-    const diagonal =
-      Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2) * 1.35;
-    rotator.style.width = rotator.style.height = Math.ceil(diagonal) + "px";
-  }
+  // Removed bg-rotator initialization
 
   // Light sweep cleanup
   const sweepCleanup = () => {

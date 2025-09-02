@@ -7,7 +7,7 @@ import {
   GlassCardDescription,
 } from "@/components/ui/glass-card";
 import { contact, whopLink } from "@/constants";
-import { MessageCircle, Calendar } from "lucide-react";
+import { MessageCircle, Calendar } from "@/lib/icons";
 
 export function Contact() {
   return (

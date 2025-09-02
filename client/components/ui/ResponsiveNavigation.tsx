@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "@/lib/icons";
 import { useResponsive } from "@/hooks/use-mobile";
 
 interface NavItem {

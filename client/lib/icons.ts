@@ -1,0 +1,63 @@
+// Import our custom direct icon implementations instead of from lucide-react
+// This avoids the antivirus issue with the Chrome icon
+import {
+  Shield,
+  AlertTriangle,
+  CreditCard,
+  Settings,
+  TrendingUp,
+  BarChart3,
+  PanelLeft,
+  X,
+  Quote,
+  Menu,
+  ChevronDown,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  MoreHorizontal,
+  Crown,
+  Check,
+  MessageCircle,
+  Calendar,
+  Monitor,
+  Smartphone,
+  Watch,
+  Tablet,
+  Chrome, // Also include Chrome icon to prevent any potential imports of it
+  Info,
+  ChevronUp,
+  Clock,
+  Play
+} from './icons-direct';
+
+// Re-export all icons
+export {
+  Shield,
+  AlertTriangle,
+  CreditCard,
+  Settings,
+  TrendingUp,
+  BarChart3,
+  PanelLeft,
+  X,
+  Quote,
+  Menu,
+  ChevronDown,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  MoreHorizontal,
+  Crown,
+  Check,
+  MessageCircle,
+  Calendar,
+  Monitor,
+  Smartphone,
+  Watch,
+  Tablet,
+  Info,
+  ChevronUp,
+  Clock,
+  Play
+};

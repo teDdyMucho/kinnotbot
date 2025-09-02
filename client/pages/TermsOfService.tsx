@@ -7,7 +7,7 @@ import {
 } from "../components/ui/glass-card";
 import { ScrollToTop } from "../components/ui/ScrollToTop";
 import { tos, disclaimer } from "../constants";
-import { Shield, AlertTriangle } from "lucide-react";
+import { Shield, AlertTriangle } from "../lib/icons";
 import { useAnimations } from "../hooks/useAnimations";
 
 export default function TermsOfService() {

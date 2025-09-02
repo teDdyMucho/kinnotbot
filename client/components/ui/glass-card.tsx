@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const cardVariants = cva(
-  "glass-card tilt transition-all duration-300 hover:bg-white/10 hover:shadow-glow-violet group",
+  "glass-card tilt transition-all duration-300 hover:bg-white/10 hover:shadow-glow-cyan border border-white/5 hover:border-electric-cyan/30 group",
   {
     variants: {
       variant: {
@@ -13,10 +13,10 @@ const cardVariants = cva(
         glow: "shadow-glow",
       },
       size: {
-        default: "p-6",
-        sm: "p-4",
-        lg: "p-8",
-        xl: "p-10",
+        default: "p-6 md:p-8",
+        sm: "p-4 md:p-6",
+        lg: "p-8 md:p-10",
+        xl: "p-10 md:p-12",
       },
     },
     defaultVariants: {
@@ -60,7 +60,7 @@ const GlassCardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-xl font-display font-semibold leading-none tracking-tight text-neon",
+      "text-xl md:text-2xl font-display font-bold leading-tight tracking-tight text-white group-hover:text-electric-cyan transition-colors duration-300",
       className,
     )}
     {...props}
@@ -74,7 +74,7 @@ const GlassCardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-muted-foreground leading-relaxed", className)}
+    className={cn("text-base text-foreground/70 leading-relaxed", className)}
     {...props}
   />
 ));

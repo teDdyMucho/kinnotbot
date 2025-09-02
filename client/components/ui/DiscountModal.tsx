@@ -2,9 +2,11 @@ import { useState } from "react";
 import { NeonInput } from "./neon-input";
 import { offerBar } from "@/constants";
 import { useDiscountModal } from "@/hooks/useDiscountModal";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function DiscountModal() {
   const { isOpen, openModal, closeModal } = useDiscountModal();
+  const isMobile = useIsMobile();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -123,14 +125,16 @@ export function DiscountModal() {
         </div>
       )}
 
-      {/* Floating Open Button */}
-      <button
-        onClick={openModal}
-        id="open-discount"
-        className="neo-btn magnetic hover:scale-105 transition-transform px-4 py-3 rounded-full text-white font-semibold shadow-lg"
-      >
-        Get Discount
-      </button>
+      {/* Floating Open Button - Hidden on mobile */}
+      {!isMobile && (
+        <button
+          onClick={openModal}
+          id="open-discount"
+          className="neo-btn magnetic hover:scale-105 transition-transform px-4 py-3 rounded-full text-white font-semibold shadow-lg"
+        >
+          Get Discount
+        </button>
+      )}
     </>
   );
 }

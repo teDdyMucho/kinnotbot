@@ -82,8 +82,8 @@ export const packages = {
         [packageFeatures[3]]: true, // 1-on-1 Set Up Call
         [packageFeatures[4]]: true, // Setting Updates
         [packageFeatures[5]]: true, // Future Upgrades
-        [packageFeatures[6]]: false, // Priority Support
-        [packageFeatures[7]]: true, // Discord Access
+        [packageFeatures[6]]: true, // Priority Support
+        [packageFeatures[7]]: false, // Discord Access
         [packageFeatures[8]]: false, // Weekly Coaching
         [packageFeatures[9]]: false, // Investor Network
       },
