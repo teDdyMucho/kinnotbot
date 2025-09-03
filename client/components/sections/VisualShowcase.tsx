@@ -21,6 +21,12 @@ export function VisualShowcase() {
       <div className="ambient-layer ambient-lines" aria-hidden="true"></div>
       <div className="edge-glow edge-left" aria-hidden="true"></div>
       <div className="edge-glow edge-right" aria-hidden="true"></div>
+      <div className="floating-orbs" aria-hidden="true">
+        <div className="orb"></div>
+        <div className="orb"></div>
+        <div className="orb"></div>
+        <div className="orb"></div>
+      </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-6 md:mb-8 lg:mb-10 reveal">
           <img 
