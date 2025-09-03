@@ -16,9 +16,11 @@ export function Steps() {
   });
   
   return (
-    <section id="how-it-works" ref={containerRef} className="pt-8 pb-16 relative">
-
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="how-it-works" ref={containerRef} className="pt-8 pb-16 relative overflow-hidden section-ambient">
+      <div className="ambient-layer ambient-lines" aria-hidden="true"></div>
+      <div className="edge-glow edge-left" aria-hidden="true"></div>
+      <div className="edge-glow edge-right" aria-hidden="true"></div>
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-12 reveal">
           <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
             How <span className="text-electric-cyan">KinnoBot</span> Works

@@ -7,9 +7,11 @@ export function FeaturedOn() {
   });
 
   return (
-    <section id="social-proof" ref={containerRef} className="py-24 border-y border-white/10 bg-charcoal/30">
-      
-      <div className="container mx-auto px-4 md:px-6">
+    <section id="social-proof" ref={containerRef} className="py-24 relative overflow-hidden section-ambient border-y border-white/10 bg-charcoal/30">
+      <div className="ambient-layer ambient-lines" aria-hidden="true"></div>
+      <div className="edge-glow edge-left" aria-hidden="true"></div>
+      <div className="edge-glow edge-right" aria-hidden="true"></div>
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-16 reveal">
           <h2 className="text-3xl md:text-4xl font-bold mb-5 text-white">
             Over <span className="text-electric-cyan">500</span> traders running KinnoBot worldwide

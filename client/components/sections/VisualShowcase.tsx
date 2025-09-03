@@ -17,8 +17,11 @@ export function VisualShowcase() {
     enableInteractiveEffects: true,
   });
   return (
-    <section id="experience" ref={containerRef} className="pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-8 lg:pb-8 relative">
-      <div className="container mx-auto px-4">
+    <section id="experience" ref={containerRef} className="pt-6 pb-8 md:pt-10 md:pb-12 lg:pt-8 lg:pb-8 relative overflow-hidden section-ambient">
+      <div className="ambient-layer ambient-lines" aria-hidden="true"></div>
+      <div className="edge-glow edge-left" aria-hidden="true"></div>
+      <div className="edge-glow edge-right" aria-hidden="true"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-6 md:mb-8 lg:mb-10 reveal">
           <img 
             src="/images/kinnobotlogo.png" 
@@ -51,7 +54,7 @@ export function VisualShowcase() {
       </div>
 
         {/* Experience Grid */}
-        <div className="reveal" style={{ height: "auto", minHeight: "auto", maxHeight: "auto", margin: "0" }}>
+        <div className="reveal">
           <div className="exp-wrap w-full">
             <div className="exp-grid w-full">
               {/* Trading Controls */}

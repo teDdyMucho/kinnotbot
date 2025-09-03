@@ -211,18 +211,8 @@ export function FeatureComparisonChart({
                       )}
                     >
                       {included === true ? (
-                        <div className={cn(
-                          "flex items-center justify-center w-8 h-8 rounded-full",
-                          plan.popular 
-                            ? "bg-electric-cyan/20" 
-                            : "bg-white/10"
-                        )}>
-                          <Check className={cn(
-                            "w-5 h-5",
-                            plan.popular 
-                              ? "text-electric-cyan" 
-                              : "text-white/70"
-                          )} />
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-electric-cyan/20">
+                          <Check className="w-5 h-5 text-electric-cyan" />
                         </div>
                       ) : included === "limited" ? (
                         <div className="flex items-center justify-center w-8 h-8 rounded-full bg-amber-500/20">

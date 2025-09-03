@@ -364,7 +364,7 @@
 .boot-play .hero-highlight::after {
   content: "";
   position: absolute;
-  inset: 0 -35% 0 -35%;
+  inset: 0 -35% 0 -150%;
   background: linear-gradient(
     90deg,
     transparent,
@@ -607,10 +607,8 @@
     opacity: 0.18;
   }
   100% {
-    transform: translateX(170%);
+    transform: translateX(220%);
     opacity: 0;
-    visibility: hidden;
-    display: none;
   }
 }
 
@@ -632,6 +630,13 @@
   filter: blur(8px);
   pointer-events: none;
   z-index: 1;
+  will-change: transform, opacity;
+  opacity: 0;
+  /* animation is gated to boot-play state */
+}
+
+.boot-play .light-sweep {
+  opacity: 1;
   animation: sweepAcross 1.6s cubic-bezier(0.22, 1, 0.36, 1) 0.15s 1 forwards;
 }
 
@@ -663,13 +668,13 @@
    ========================================= */
 /* ---------- scale the whole section down ~20% (desktop) ---------- */
 .exp-wrap {
-  transform: scale(0.8); /* 80% size */
+  transform: none; /* disable scaling on desktop */
   transform-origin: top center;
   margin-bottom: 40px; /* Reduced margin to fix spacing gap */
 }
 @media (max-width: 1199px) {
   .exp-wrap {
-    transform: scale(0.9);
+    transform: none; /* disable scaling on tablet */
   } /* a little larger on tablet */
 }
 @media (max-width: 767px) {
@@ -683,12 +688,12 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-areas:
-    "controls dashboard dashboard"
-    "desktop  mobile    watch"
+    "desktop dashboard dashboard"
+    "controls  mobile    watch"
     ".        flow      .";
   justify-items: center; /* center cards in their cells */
   align-items: center;
-  gap: 32px; /* maximized spacing */
+  gap: 20px; /* reduced spacing */
 }
 
 /* ====== Area assignment ====== */
@@ -1294,4 +1299,27 @@ html {
 /* Smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
+}
+
+/* Section ambient backgrounds */
+.section-ambient { position: relative; overflow: hidden; }
+.section-ambient .ambient-layer { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.section-ambient .ambient-lines { 
+  background: repeating-linear-gradient(120deg, rgba(255,255,255,0.035) 0 2px, rgba(255,255,255,0) 2px 28px);
+  opacity: 0.12;
+  animation: linesDrift 50s linear infinite;
+}
+.section-ambient .edge-glow { position: absolute; top: -10%; bottom: -10%; width: min(22vw, 320px); filter: blur(20px); opacity: 0.22; }
+.section-ambient .edge-left { left: -8vw; background: radial-gradient(60% 60% at 50% 50%, rgba(71,214,255,0.25), rgba(124,92,255,0.0) 70%); }
+.section-ambient .edge-right { right: -8vw; background: radial-gradient(60% 60% at 50% 50%, rgba(124,92,255,0.22), rgba(71,214,255,0.0) 70%); }
+
+@keyframes linesDrift { 0% { background-position: 0 0; } 100% { background-position: 600px 0; } }
+
+@media (max-width: 768px) {
+  .section-ambient .ambient-lines { opacity: 0.08; }
+  .section-ambient .edge-glow { opacity: 0.16; width: min(30vw, 220px); filter: blur(16px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-ambient .ambient-lines { animation: none !important; }
 }
