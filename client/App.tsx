@@ -1,5 +1,6 @@
 import "./global.css";
 import "./responsive.css";
+import "./animations.css";
 
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";

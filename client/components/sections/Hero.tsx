@@ -1,6 +1,7 @@
 import { NeonButton } from "@/components/ui/neon-button";
 import { hero, whopLink } from "@/constants";
 import { useAnimations } from "@/hooks/useAnimations";
+import "@/animations.css";
 
 export function Hero() {
   const { containerRef } = useAnimations({
@@ -46,6 +47,11 @@ export function Hero() {
           <div className="particle particle-3"></div>
           <div className="particle particle-4"></div>
           <div className="particle particle-5"></div>
+          <div className="particle particle-6"></div>
+          <div className="particle particle-7"></div>
+          <div className="particle particle-8"></div>
+          <div className="particle particle-9"></div>
+          <div className="particle particle-10"></div>
         </div>
 
       {/* Focused linear line */}
