@@ -2,6 +2,8 @@ import { NeonButton } from "@/components/ui/neon-button";
 import { hero, whopLink } from "@/constants";
 import { useAnimations } from "@/hooks/useAnimations";
 import "@/animations.css";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export function Hero() {
   const { containerRef } = useAnimations({
@@ -10,6 +12,16 @@ export function Hero() {
     enableInteractiveEffects: true,
   });
 
+    // State to track if the fixed-elements container is available in the DOM
+    const [fixedElementsContainer, setFixedElementsContainer] = useState<HTMLElement | null>(null);
+
+    // Find the fixed-elements container once the component mounts
+    useEffect(() => {
+      const container = document.getElementById('fixed-elements');
+      if (container) {
+        setFixedElementsContainer(container);
+      }
+    }, []);
   return (
     <section
       id="hero"
@@ -24,8 +36,11 @@ export function Hero() {
         <div className="light-sweep"></div>
       </div>
 
-      {/* Hero cursor glow */}
-      <div id="heroGlow" />
+      {/* Hero cursor glow - rendered outside the scaled container */}
+      {fixedElementsContainer && createPortal(
+        <div id="heroGlow" />,
+        fixedElementsContainer
+      )}
 
       {/* Background elements with focused linear line */}
       {/* <div 

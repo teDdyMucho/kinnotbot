@@ -9,7 +9,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="py-16 border-t border-white/10 bg-charcoal/50">
+    <footer className="py-8 border-t border-white/10 bg-charcoal/50" style={{ marginBottom: 0, paddingBottom: '0.5rem' }}>
       <div className="container mx-auto px-4">
         <div className="space-y-12 reveal">
           {/* Policy Links */}

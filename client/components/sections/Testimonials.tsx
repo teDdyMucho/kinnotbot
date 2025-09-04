@@ -42,19 +42,19 @@ export function Testimonials() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <section className="py-12 relative">
+    <section className="py-24 md:py-32 relative">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-neon mb-6">
+          <h2 className="section-title text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-neon mb-8">
             What Traders Say
           </h2>
-          <p className="text-lg sm:text-xl text-foreground/70">
+          <p className="text-xl sm:text-2xl text-foreground/70 max-w-3xl mx-auto">
             Real feedback from real traders
           </p>
         </motion.div>
@@ -64,20 +64,20 @@ export function Testimonials() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 max-w-6xl mx-auto"
         >
           {proofImages.map((imagePath, index) => (
             <motion.div key={index} variants={itemVariants}>
-              <GlassCard variant="hover" size="lg" className="h-full cursor-pointer overflow-hidden" onClick={() => setSelectedImage(imagePath)}>
-                <div className="relative w-full h-64 overflow-hidden">
+              <GlassCard variant="hover" size="lg" className="h-full cursor-pointer overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1" onClick={() => setSelectedImage(imagePath)}>
+                <div className="relative w-full h-[28rem] overflow-hidden">
                   <img 
                     src={imagePath} 
                     alt={`Trading proof ${index + 1}`} 
-                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                   />
                 </div>
-                <GlassCardContent>
-                  <p className="text-electric-cyan font-medium text-center">
+                <GlassCardContent className="p-6">
+                  <p className="text-electric-cyan font-medium text-center text-xl py-3">
                     Click to enlarge
                   </p>
                 </GlassCardContent>

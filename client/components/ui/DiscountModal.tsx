@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { NeonInput } from "./neon-input";
 import { offerBar } from "@/constants";
 import { useDiscountModal } from "@/hooks/useDiscountModal";
@@ -31,10 +32,21 @@ export function DiscountModal() {
     }
   };
 
+  // State to track if the fixed-elements container is available in the DOM
+  const [fixedElementsContainer, setFixedElementsContainer] = useState<HTMLElement | null>(null);
+
+  // Find the fixed-elements container once the component mounts
+  useEffect(() => {
+    const container = document.getElementById('fixed-elements');
+    if (container) {
+      setFixedElementsContainer(container);
+    }
+  }, []);
+
   return (
     <>
-      {/* Modal */}
-      {isOpen && (
+      {/* Modal - Rendered outside the scaled container */}
+      {isOpen && fixedElementsContainer && createPortal(
         <div
           id="discount-modal"
           role="dialog"
@@ -122,18 +134,20 @@ export function DiscountModal() {
               </form>
             </div>
           </div>
-        </div>
+        </div>,
+        fixedElementsContainer
       )}
 
-      {/* Floating Open Button - Hidden on mobile */}
-      {!isMobile && (
+      {/* Floating Open Button - Hidden on mobile - Rendered outside the scaled container */}
+      {!isMobile && fixedElementsContainer && createPortal(
         <button
           onClick={openModal}
           id="open-discount"
           className="neo-btn magnetic hover:scale-105 transition-transform px-4 py-3 rounded-full text-white font-semibold shadow-lg"
         >
           Get Discount
-        </button>
+        </button>,
+        fixedElementsContainer
       )}
     </>
   );

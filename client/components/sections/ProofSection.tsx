@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { GlassCard, GlassCardContent } from "@/components/ui/glass-card";
 import { useAnimations } from "@/hooks/useAnimations";
 import { Play } from "@/lib/icons";
@@ -13,6 +14,20 @@ export function ProofSection() {
   
   // State for video modal
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
+  // Lock body scroll while any modal is open
+  useEffect(() => {
+    const anyOpen = Boolean(selectedImage || selectedVideo);
+    const originalOverflow = document?.body?.style?.overflow || "";
+    if (anyOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = originalOverflow;
+    }
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [selectedImage, selectedVideo]);
 
   // Array of proof images
   const proofImages = [
@@ -126,63 +141,67 @@ export function ProofSection() {
           </div>
         </div> */}
 
-        {/* Image Modal */}
-        {selectedImage && (
-          <div 
-            className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedImage(null)}
-          >
-            <div className="relative max-w-4xl max-h-[90vh] overflow-auto">
-              <button 
-                className="absolute top-2 right-2 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedImage(null);
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-              <img 
-                src={selectedImage} 
-                alt="Trading proof enlarged" 
-                className="max-w-full max-h-[85vh] object-contain"
-              />
-            </div>
-          </div>
-        )}
+        {/* Image Modal (rendered in portal to avoid transformed ancestors) */}
+        {selectedImage && typeof document !== "undefined" &&
+          createPortal(
+            <div
+              className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4"
+              onClick={() => setSelectedImage(null)}
+            >
+              <div className="relative max-w-4xl max-h-[90vh] overflow-auto">
+                <button
+                  className="absolute top-2 right-2 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedImage(null);
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+                <img
+                  src={selectedImage}
+                  alt="Trading proof enlarged"
+                  className="max-w-full max-h-[85vh] object-contain"
+                />
+              </div>
+            </div>,
+            document.body
+          )}
 
-        {/* Video Modal */}
-        {selectedVideo && (
-          <div 
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedVideo(null)}
-          >
-            <div className="relative max-w-4xl w-full max-h-[90vh]">
-              <button 
-                className="absolute -top-10 right-0 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedVideo(null);
-                }}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-              <video 
-                src={selectedVideo}
-                controls
-                autoPlay
-                className="max-w-full max-h-[85vh] w-full"
-                onClick={(e) => e.stopPropagation()}
-              />
-            </div>
-          </div>
-        )}
+        {/* Video Modal (rendered in portal) */}
+        {selectedVideo && typeof document !== "undefined" &&
+          createPortal(
+            <div
+              className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+              onClick={() => setSelectedVideo(null)}
+            >
+              <div className="relative max-w-4xl w-full max-h-[90vh]">
+                <button
+                  className="absolute -top-10 right-0 bg-white/20 hover:bg-white/40 rounded-full p-2 text-white"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedVideo(null);
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+                <video
+                  src={selectedVideo}
+                  controls
+                  autoPlay
+                  className="max-w-full max-h-[85vh] w-full"
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+            </div>,
+            document.body
+          )}
       </div>
     </section>
   );

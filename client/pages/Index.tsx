@@ -24,12 +24,12 @@ export default function Index() {
   });
 
   return (
-    <div ref={containerRef} className="min-h-screen m-0 p-0" style={{ margin: 0, padding: 0 }}>
+    <div ref={containerRef} className="m-0 p-0" style={{ margin: 0, padding: 0 }}>
       <OfferBar />
       <Hero />
       <FeaturedOn />
       <ValueProposition />
-      {/* <VisualShowcase /> */}
+      <VisualShowcase />
       <Steps />
       <DemoProof />
       <Packages />
