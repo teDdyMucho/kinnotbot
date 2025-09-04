@@ -29,7 +29,7 @@ export default function Index() {
       <Hero />
       <FeaturedOn />
       <ValueProposition />
-      <VisualShowcase />
+      {/* <VisualShowcase /> */}
       <Steps />
       <DemoProof />
       <Packages />

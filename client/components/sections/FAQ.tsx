@@ -18,6 +18,21 @@ export function FAQ() {
   // Enhanced FAQ items
   const enhancedFaqItems = [
     {
+      q: "Do I need trading experience to use KinnoBot?",
+      a: "",
+      video: "images/For_Proof_Section/faqA1.mp4"
+    },
+    {
+      q: "Does the bot work on any brokers?",
+      a: "",
+      video: "images/For_Proof_Section/faqA2.mp4"
+    },
+    {
+      q: "How long does it take to set up?",
+      a: "",
+      video: "images/For_Proof_Section/faqA3.mp4"
+    },
+    {
       q: "What is KinnoBot and how does it work?",
       a: "KinnoBot is an AI-powered trading bot for MT5 that analyzes market conditions 24/7 and executes trades automatically based on sophisticated algorithms. It uses machine learning to adapt to changing market conditions and optimize trading strategies for maximum profitability."
     },
@@ -28,10 +43,6 @@ export function FAQ() {
     {
       q: "What kind of returns can I expect?",
       a: "While past performance doesn't guarantee future results, KinnoBot has achieved an average monthly return of 8.2% in live trading conditions. Results vary based on market conditions, risk settings, and account size."
-    },
-    {
-      q: "Do I need trading experience to use KinnoBot?",
-      a: "No, KinnoBot is designed for traders of all experience levels. The bot handles all trading decisions automatically, though basic knowledge of MT5 is helpful for setup. Our comprehensive guides and 24/7 support make it easy for beginners."
     },
     {
       q: "What's the minimum deposit required?",
@@ -54,7 +65,7 @@ export function FAQ() {
   return (
     <section id="faq" ref={containerRef} className="py-24 relative">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-16 reveal">
+        <div className="text-center mb-16">
           <h2 className="section-title text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
             Frequently <span className="text-electric-cyan">Asked Questions</span>
           </h2>
@@ -67,7 +78,7 @@ export function FAQ() {
           {enhancedFaqItems.map((item, index) => (
             <div 
               key={index} 
-              className={`glass-card mb-5 overflow-hidden transition-all duration-300 reveal ${openIndex === index ? 'border-electric-cyan/50 shadow-glow-sm' : 'border-white/10 hover:border-white/30'}`}
+              className={`glass-card mb-5 overflow-hidden transition-all duration-300 ${openIndex === index ? 'border-electric-cyan/50 shadow-glow-sm' : 'border-white/10 hover:border-white/30'}`}
             >
               <button
                 className="w-full text-left p-6 md:p-8 flex items-center justify-between group"
@@ -85,19 +96,34 @@ export function FAQ() {
               
               <div 
                 className={cn(
-                  "overflow-hidden transition-all duration-300",
-                  openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                  "overflow-hidden transition-all duration-500",
+                  openIndex === index ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
                 )}
               >
                 <div className="p-6 md:p-8 pt-0 text-foreground/80 border-t border-white/10 leading-relaxed">
-                  {item.a}
+                  {item.video ? (
+                    <div className="video-container py-4">
+                      <video 
+                        className="w-full rounded-lg shadow-lg" 
+                        controls 
+                        playsInline
+                        preload="metadata"
+                        key={`video-${index}-${openIndex === index}`}
+                      >
+                        <source src={item.video} type="video/mp4" />
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  ) : (
+                    item.a
+                  )}
                 </div>
               </div>
             </div>
           ))}
         </div>
         
-        <div className="glass-card p-8 md:p-10 max-w-4xl mx-auto reveal hover:shadow-glow-cyan transition-all duration-300">
+        <div className="glass-card p-8 md:p-10 max-w-4xl mx-auto hover:shadow-glow-cyan transition-all duration-300">
           <div className="flex items-center gap-5 mb-8">
             <div className="w-14 h-14 rounded-full bg-gradient-to-br from-electric-blue to-electric-violet flex items-center justify-center shadow-glow-sm">
               <MessageCircle className="w-7 h-7 text-obsidian" />
